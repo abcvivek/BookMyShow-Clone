@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Popcorn Time - login Page</title>
+    <!--External Links-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+    <!-- custom style sheet -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body style="background-color:rgb(236, 235, 235)">
+    <div class="container login-container">
+        <div class="row">
+            <div class="col-md-4 login-form-1 hidden-sm hidden-xs">
+                <h4 id="form-text-1">Entertainment is what makes you happy and feel relaxed</h4>
+            </div>
+            <div class="col-md-8 login-form-2">
+                <h2 style="letter-spacing : 2px;">Login Panel</h2>
+                <form action="{% url 'login:user_login' %}" method="POST">
+                    <div class="form-group">
+                        <label for="username">Your Username</label>
+                        <input type="text" class="form-control" placeholder="sammy_123" value="" id="username" name="username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Your Password</label>
+                        <input type="password" class="form-control" value="" id="password" name="password" />
+                    </div></br>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="submit" class="btnSubmit" value="Login" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

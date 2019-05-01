@@ -1,0 +1,46 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block content %}
+
+<style>
+h3 {
+        color : rgb(7, 7, 218);
+        margin-top : -20px;
+    }
+
+h4 {
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    font-size: 17px;
+}
+.btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(7, 7, 218);
+        border-radius: 2rem;
+        width: 150px;
+        font-weight: 700;
+    }
+
+    .btn-primary:hover {
+        color: rgb(0, 0, 0);
+        background-color: rgb(7, 7, 218);
+    }
+
+</style>
+
+<h3><strong>
+    Details of {{ screen.name }}
+  </strong></h3></br>
+
+  <h4><strong>ID : </strong>{{ screen.id }}</h4>
+  <h4><strong>Name : </strong>{{ screen.name }}</h4>
+  <h4><strong>No of Rows : </strong>{{ screen.no_of_rows }}</h4>
+  <h4><strong>No of Columns : </strong>{{ screen.no_of_columns }}</h4>
+  <h4><strong>Belongs to : </strong>{{ screen.theatre.name }} Theatre</h4>
+  <h4><strong>Managed By : </strong>{{ screen.theatre.theatre_manager.name }}</h4></br>
+
+
+
+  <a href="{% url 'dashboard:screen-view' %}"><button class="btn btn-primary">Back</button></a>
+
+{% endblock %}

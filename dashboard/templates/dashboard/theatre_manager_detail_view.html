@@ -1,0 +1,43 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block content %}
+
+<style>
+h3 {
+        color : rgb(7, 7, 218);
+        margin-top : -20px;
+    }
+
+h4 {
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    font-size: 17px;
+}
+.btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(7, 7, 218);
+        border-radius: 2rem;
+        width: 150px;
+        font-weight: 700;
+    }
+
+    .btn-primary:hover {
+        color: rgb(0, 0, 0);
+        background-color: rgb(7, 7, 218);
+    }
+
+</style>
+
+<h3><strong>
+    Details of {{ theatre_managers.name }}
+  </strong></h3></br>
+
+  <h4><strong>ID : </strong>{{ theatre_managers.id }}</h4>
+  <h4><strong>Name : </strong>{{ theatre_managers.name }}</h4>
+  <h4><strong>Email : </strong>{{ theatre_managers.email }}</h4>
+  <h4><strong>Phone : </strong>{{ theatre_managers.phone }}</h4>
+  <h4><strong>Address : </strong>{{ theatre_managers.address }}</h4></br>
+
+  <a href="{% url 'dashboard:theatre-manager-view' %}"><button class="btn btn-primary">Back</button></a>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+button:focus {
+  outline: none;
+}
+
+.mySlides {display:none;}
+
+body {
+  font-family: 'Bitter', serif;
+}
+
+
+#myNavbar > ul > li > a {
+  font-size: 17px;
+  color : rgb(255,255,255);
+}
+
+#navigation_bar {
+    background-color : rgb(0,0,0);
+    border : none;
+}
+
+#search_submit {
+    background-color: rgb(255,255,255);
+    color :rgb(0,0,0); 
+    border : none;
+}
+
+#first_letter {
+    color : rgb(255,0,0);
+    font-size : 24px;
+    letter-spacing : 4px;
+}
+
+
+.navbar-brand,.footer-brand {
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+
+.footer-brand:hover {
+  text-decoration: none;
+}
+  
+.topnav {
+overflow: hidden;
+background-color: rgb(0,0,0);
+}
+
+.topnav a,.topnav form {
+float: left;
+display: block;
+color: rgb(255,255,255);
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+font-size: 17px;
+}
+
+.topnav a:hover {
+  text-decoration: none;
+  color: rgb(255,255,255);
+}
+
+.topnav .icon {
+display: none;
+}
+
+.topnav .icon:hover {
+  text-decoration: none;
+  color: rgb(255,255,255);
+}
+
+#center-heading {
+  text-align: center;
+  color : rgb(255,255,255);
+  font-family: 'Bitter', serif;
+  letter-spacing: 8px;
+  word-spacing: 5px;
+}
+
+.background-heading {
+  margin-top: 20px;
+  background-image: linear-gradient(to bottom left,rgb(255,0,0),rgb(0,0,0));
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+  transition: 0.3s;
+  border-radius: 10px; /* 5px rounded corners */
+}
+
+.card:hover {
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,1);
+}
+
+
+@media screen and (max-width: 992px) {
+.topnav a:not(:first-child),.topnav form:not(:first-child) {display: none;}
+.topnav a.icon,.topnav form.icon {
+  float: right;
+  display: block;
+}
+
+.topnav a.icon {
+    color: rgb(255,255,255);
+ text-decoration: none;
+}
+}
+
+@media screen and (max-width: 992px) {
+
+.topnav.responsive .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.topnav.responsive a,.topnav.responsive form  {
+  float: none;
+  display: block;
+  text-align: center;
+}
+
+}

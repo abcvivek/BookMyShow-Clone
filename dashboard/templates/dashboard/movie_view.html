@@ -1,0 +1,77 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block content %}
+
+<style>
+h3 {
+        color : rgb(7, 7, 218);
+        margin-top : -20px;
+    }
+
+td {
+  padding: 1% !important;
+  font-weight: 400;
+  color : rgb(0,0,0);
+  text-align: center;
+}
+
+th {
+  text-align: center;
+}
+
+.btn-success,.btn-danger,.btn-primary {
+  border-radius: 5rem;
+  background-color: rgb(48, 42, 56);
+  border-color: rgb(48, 42, 56);
+}
+
+.btn-success:hover,.btn-danger:hover,.btn-primary:hover {
+  background-color: rgb(0,0,0);
+  border-color: rgb(0,0,0);
+}
+
+.btn-default {
+  color: rgb(255, 255, 255);
+  background-color: rgb(7, 7, 218);
+  border-radius: 2rem;
+  width: 180px;
+  font-weight: 700;
+  float : right;
+  }
+
+.btn-default:hover { 
+  color: rgb(255, 255, 255);
+  background-color: rgb(7, 7, 218);
+}
+
+.panel-default{
+  background-color: rgb(7, 7, 218);
+}
+
+</style>
+
+<h3><strong>
+  Movies
+</strong><a href="{% url 'dashboard:movie-create' %}"><button class="btn btn-default"><i class="fas fa-plus"></i> &nbsp;Movie</button></a></h3></br>
+
+
+<div class="row">
+    {% for mo in movie %}
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <img src="{{ mo.thumbnail_image.url }}" width="100%" height="100%" />
+            </div>
+            <div class="panel-body">
+                <div class="container" style="margin-left: 8%;">
+                <a href="{% url 'dashboard:movie-detail-view' pk=mo.id %}"><button class="btn btn-primary"><i class="fas fa-eye"></i></button></a> &nbsp; &nbsp; <a href="{% url 'dashboard:movie-update-view' pk=mo.id %}"><button class="btn btn-success"><i class="fas fa-pen"></i></button></a> &nbsp; &nbsp; <a href="{% url 'dashboard:movie-delete-view' pk=mo.id %}"><button class="btn btn-danger"> <i class="fas fa-trash"></i></button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+

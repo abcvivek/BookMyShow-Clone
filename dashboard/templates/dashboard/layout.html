@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+        {% load static %}
+<head>
+  <title>Dashboard</title>  <!-- Title of the websiite can be changed here  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--External Links-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <script src="{%static 'js/bootstrap.min.js' %}"></script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <!-- custom style sheet -->
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+	<body style="background-color:rgb(236, 235, 235);"> <!-- Background color of the website  can be changed here -->
+
+
+<div class="sidenav hidden-sm hidden-xs" id="dashboard_sidenav">
+    <h4><strong>Welcome Vivek</strong></h4>
+
+  <button class="dropdown-btn"><i class="fas fa-couch"></i> &nbsp;<strong> Theatre Management </strong> &nbsp;<i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-container">
+        <a href="{% url 'dashboard:theatre-manager-view' %}"><strong>Theatre Managers</strong></a>
+      <a href="{% url 'dashboard:theatre-view' %}"><strong>Theatres</strong></a>
+      <a href="{% url 'dashboard:screen-view' %}"><strong>Screens</strong></a>
+      <a href="{% url 'dashboard:show-view' %}"><strong>Shows</strong></a>
+      
+    </div>
+
+  <a href="{% url 'dashboard:movie-view' %}"><i class="fas fa-film"></i> &nbsp;<strong> Movie Management</strong> </a>
+  <a href="#"><i class="fas fa-users"></i> &nbsp;<strong> Users Management</strong></a>
+  <!-- <a href="#"><i class="fas fa-user-tie"></i> &nbsp;<strong> Profile</strong></a> -->
+  <a href="{% url 'login:logout' %}"><i class="fas fa-cog"></i> &nbsp;<strong> Logout</strong></a>
+  <h5 class="version"><strong>Version 1.0</strong></h5>
+</div>
+
+
+<!--mobile navbar-->
+
+
+<div class="topnav" id="myTopnav" style="margin-bottom:20px;">
+<div class="hidden-lg hidden-md">
+  <a href="#"><strong>Welcome Vivek</strong></a>  <!-- change your website name for mobile and tablet version -->
+  <a href="#"><i class="fas fa-couch"></i> &nbsp;<strong> Thatre Management</strong></a>
+  <a href="#"><i class="fas fa-film"></i> &nbsp;<strong> Movie Management</strong> </a>
+  <a href="#"><i class="fas fa-users"></i> &nbsp;<strong> Users Management</strong></a>
+  <a href="#"><i class="fas fa-user-tie"></i> &nbsp;<strong> Profile</strong></a>
+  <a href="#"><i class="fas fa-cog"></i> &nbsp;<strong> Logout</strong></a>
+
+  
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+</div>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+
+</script>
+
+
+<!--end of mobile navbar-->
+
+
+<div class="container">
+  <div class="jumbotron">
+
+    {% block content %}
+    {% endblock %}
+
+  </div>
+</div>
+
+</body>
+</html>

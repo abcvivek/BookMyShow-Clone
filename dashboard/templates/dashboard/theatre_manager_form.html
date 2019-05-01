@@ -1,0 +1,54 @@
+{% extends 'dashboard/layout.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+
+    h3 {
+        color : rgb(7, 7, 218);
+        margin-top : -20px;
+    }
+
+    label {
+        color: rgb(0, 0, 0);
+        letter-spacing: 2px;
+    }
+
+    .form-control {
+        width: 90%;
+    }
+
+    .btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(7, 7, 218);
+        border-radius: 2rem;
+        width: 150px;
+        font-weight: 700;
+    }
+
+    .btn-primary:hover {
+        color: rgb(0, 0, 0);
+        background-color: rgb(7, 7, 218);
+    }
+
+
+</style>
+
+<h3><strong>
+    {% if not form.instance.pk %}
+    Add Theatre Manager
+    {% else %}
+    Update Theatre Manager
+    {% endif %}
+</strong></h3></br>
+
+<form method="POST">
+    {{ form|crispy }}
+    {% csrf_token %}
+
+</br><input type="submit" class="btn btn-primary" value="submit">
+</form>
+
+{% endblock %}

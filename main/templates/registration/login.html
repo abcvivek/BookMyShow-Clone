@@ -1,0 +1,56 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+        border-radius: 2rem;
+        width: 180px;
+        font-weight: 700;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+    }
+
+    button:focus {
+        outline: none !important;
+    }
+
+    .bg-img {
+        background-image: url("{% static 'image/login.jpeg' %}");
+        min-height: 500px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        
+    }
+
+</style>
+
+<div class="bg-img" style="margin-top : -50px;">
+    <div class="container" style="padding-top : 100px;">
+        <div class="jumbotron center-block" style="max-width: 600px;">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <a href="{% url 'password_reset' %}">Forgot Password ?</a>
+                <button type="submit" class="btn btn-primary center-block">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

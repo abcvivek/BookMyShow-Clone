@@ -1,0 +1,47 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block content %}
+
+<style>
+h3 {
+        color : rgb(7, 7, 218);
+        margin-top : -20px;
+    }
+
+h4 {
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    font-size: 17px;
+}
+.btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(7, 7, 218);
+        border-radius: 2rem;
+        width: 150px;
+        font-weight: 700;
+    }
+
+    .btn-primary:hover {
+        color: rgb(0, 0, 0);
+        background-color: rgb(7, 7, 218);
+    }
+
+</style>
+
+<h3><strong>
+    Details of {{ movie.name }}
+  </strong></h3></br>
+
+  <h4><strong>ID : </strong>{{ movie.id }}</h4>
+  <h4><strong>Name : </strong>{{ movie.name }}</h4>
+  <h4><strong>Hero : </strong>{{ movie.hero }}</h4>
+  <h4><strong>Heroine : </strong>{{ movie.heroine }}</h4>
+  <h4><strong>Director : </strong>{{ movie.director }}</h4>
+  <h4><strong>Release Date : </strong>{{ movie.release_date }}</h4>
+  <h4><strong>Movie Runtime : </strong>{{ movie.runtime_in_minutes }}</h4>
+  <h4><strong>Show Information : </strong>{{ movie.show.date_time }}</h4>
+
+
+  <a href="{% url 'dashboard:movie-view' %}"><button class="btn btn-primary">Back</button></a>
+
+{% endblock %}

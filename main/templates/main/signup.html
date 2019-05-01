@@ -1,0 +1,56 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .help-block {
+        font-size: 16px !important;
+    }
+
+    .btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+        border-radius: 2rem;
+        width: 180px;
+        font-weight: 700;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+    }
+
+    button:focus {
+        outline: none !important;
+    }
+
+    .bg-img {
+        background-image: url("{% static 'image/login.jpeg' %}");
+        min-height: 380px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        
+    }
+</style>
+<div class="bg-img" style="margin-top : -50px;">
+    <div class="container" style="padding-top : 50px;">
+        <div class="jumbotron center-block" style="max-width: 600px;">
+            <form action="{% url 'main:signup' %}" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary center-block">Signup</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

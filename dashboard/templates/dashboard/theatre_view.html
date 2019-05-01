@@ -1,0 +1,73 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block content %}
+
+<style>
+h3 {
+        color : rgb(7, 7, 218);
+        margin-top : -20px;
+    }
+
+td {
+  padding: 1% !important;
+  font-weight: 400;
+  color : rgb(0,0,0);
+  text-align: center;
+}
+
+th {
+  text-align: center;
+}
+
+.btn-success,.btn-danger,.btn-primary {
+  border-radius: 5rem;
+}
+
+.btn-primary {
+  background-color: rgb(7, 7, 218);
+}
+
+.btn-default {
+  color: rgb(255, 255, 255);
+  background-color: rgb(7, 7, 218);
+  border-radius: 2rem;
+  width: 180px;
+  font-weight: 700;
+  float : right;
+  }
+
+.btn-default:hover { 
+  color: rgb(255, 255, 255);
+  background-color: rgb(7, 7, 218);
+}
+
+</style>
+
+<h3><strong>
+  Theatres
+</strong><a href="{% url 'dashboard:theatre-create' %}"><button class="btn btn-default"><i class="fas fa-plus"></i> &nbsp;Theatre</button></a></h3></br>
+
+
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone No</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for th in theatre %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ th.name }}</td>
+        <td>{{ th.phone }}</td>
+        <td><a href="{% url 'dashboard:theatre-detail-view' pk=th.id %}"><button class="btn btn-primary"><i class="fas fa-eye"></i></button></a> &nbsp; &nbsp; <a href="{% url 'dashboard:theatre-update-view' pk=th.id %}"><button class="btn btn-success"><i class="fas fa-pen"></i></button></a> &nbsp; &nbsp; <a href="{% url 'dashboard:theatre-delete-view' pk=th.id %}"><button class="btn btn-danger"> <i class="fas fa-trash"></i></button></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

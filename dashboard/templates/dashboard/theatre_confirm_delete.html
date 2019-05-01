@@ -1,0 +1,45 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block content %}
+
+<style>
+
+h3 {
+        color : rgb(7, 7, 218);
+        margin-top : -20px;
+    }
+
+.btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(7, 7, 218);
+        border-radius: 2rem;
+        width: 150px;
+        font-weight: 700;
+    }
+
+.btn-primary:hover {
+    background-color: rgb(7, 7, 218);
+}
+
+.btn-danger {
+    border-radius: 2rem;
+    width: 150px;
+    font-weight: 700; 
+}
+
+</style>
+
+    <h3><strong>Delete {{ theatre.name }} ?</strong></h3></br>
+    <div class="row">
+        <div class="col-lg-3">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Yes, Delete" class="btn btn-danger">     
+        </form>
+        </div>
+        <div class="col-lg-9">
+            <a href="{% url 'dashboard:theatre-view' %}"><button class="btn btn-primary">No, Cancel</button></a> 
+        </div>
+    </div>
+    
+{% endblock %}
