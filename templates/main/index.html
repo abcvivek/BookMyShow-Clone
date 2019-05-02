@@ -42,9 +42,10 @@
           <li><a href="{% url 'main:signup' %}"><strong><span class="glyphicon glyphicon-user"></span>&nbsp;Signup</strong></a></li>
           <li><a href="{% url 'login' %}"><strong><span class="glyphicon glyphicon-log-in"></span>&nbsp; Login</strong></a></li>
           {% endif %}
-          <form class="navbar-form navbar-right" action="#">
+          <form class="navbar-form navbar-right" action="{% url 'main:search' %}" method="POST">
+            {% csrf_token %}
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <input type="text" class="form-control" placeholder="Movie,Hero,Heroine" name="search">
             </div>
             <button type="submit" class="btn btn-default"><strong>Submit</strong></button>
           </form>

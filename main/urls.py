@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('signup/',views.user_signup,name="signup"),
     path('movies/', views.movies.as_view(), name='movies'),
+    path('search/', views.search, name='search'),
     re_path(r'^accounts/(?P<pk>\d+)/(?P<user>\w+)/',views.account.as_view(),name="accounts"),
     re_path(r'^accounts-update/(?P<pk>\d+)/',views.account_update.as_view(),name="accounts-update"),
     re_path(r'^accounts-delete/(?P<pk>\d+)/',views.account_delete.as_view(),name="accounts-delete"),

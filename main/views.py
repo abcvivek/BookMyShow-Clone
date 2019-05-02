@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,HttpResponseForbidden
+from django.http import HttpResponse,HttpResponseForbidden,HttpResponseRedirect
 from dashboard import models
 from dashboard.models import movie,show,theatre,screen,User
 from django.views.generic import DetailView,ListView,TemplateView,UpdateView,DeleteView
@@ -7,6 +7,8 @@ from django.db import connection
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
+from django.db.models import Q
+from django.contrib import messages
 
 
 # Create your views here.
@@ -78,6 +80,23 @@ def user_signup(request) :
     else :
         form = UserCreationForm()
     return render(request,'main/signup.html',{'form':form})
+
+
+def search(request) :
+    if request.method == 'POST' :
+        search_query = request.POST['search']
+
+        if search_query :
+            result = movie.objects.filter(Q(name__icontains=search_query) | Q(hero__icontains=search_query) | Q(heroine__icontains=search_query))
+
+            if result :
+                return render(request,'main/search.html',{'results':result,'search_query' : search_query})
+            else :
+                messages.error(request,'Sorry no results found')
+        else :
+            return HttpResponseRedirect('/')
+
+    return render(request,'main/search.html')
 
 
    
