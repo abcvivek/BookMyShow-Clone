@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,HttpResponseForbidden,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseForbidden,HttpResponseRedirect,HttpResponseBadRequest
 from dashboard import models
 from dashboard.models import movie,show,theatre,screen,User
 from django.views.generic import DetailView,ListView,TemplateView,UpdateView,DeleteView
@@ -9,6 +9,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.db.models import Q
 from django.contrib import messages
+from main.models import TicketsForm,booking
+from datetime import datetime, timedelta
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -38,11 +41,54 @@ class movie_booking_theatre(DetailView) :
     model = models.movie
     template_name = 'main/movie-booking-theatre.html'
 
-# login required
-class booking(DetailView) :
+
+class show_details(LoginRequiredMixin,DetailView) :
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)    
+        context['form'] = TicketsForm
+        show_id = self.kwargs['pk']
+        Show = show.objects.get(pk=show_id)
+        context['tickets_booked'] = booking.objects.filter(show=Show)
+        return context
+
     context_object_name = 'show'
     model = models.show
     template_name = 'main/booking-page.html'
+
+@login_required
+def book_ticket(request,pk=None,id=None):
+   
+    data = TicketsForm(request.POST)
+    Booking = data.save(commit=False) 
+    Show = show.objects.get(pk=pk)
+    user = User.objects.get(pk=id)
+    Booking.show = Show
+    Booking.user = user
+
+    if Booking.row_num == 0 or Booking.col_num == 0 or Booking.row_num > Show.screen.no_of_rows or Booking.col_num > Show.screen.no_of_columns:
+        return HttpResponseBadRequest("Invalid ticket number")
+
+    if not request.session.session_key:
+        request.session.save()
+    Booking.session = request.session.session_key 
+
+    try:
+        existing_tix = booking.objects.get(row_num=Booking.row_num, col_num=Booking.col_num, show=Show)
+        if existing_tix.session == Booking.session and existing_tix.status == 1:
+            if existing_tix.status == 1:
+                existing_tix.delete()
+            else:
+                Booking = existing_tix
+        else:
+            return HttpResponseBadRequest("This ticket has already been reserved")
+    except booking.DoesNotExist:
+        pass
+
+    Booking.save()
+
+    return redirect('main:booked',pk=pk)
+
 
 class account(LoginRequiredMixin,DetailView) :
     def get_context_data(self, **kwargs):
@@ -50,6 +96,7 @@ class account(LoginRequiredMixin,DetailView) :
         user_id = self.kwargs['pk']
         username = self.kwargs['user']
         u = User.objects.get(pk=user_id)
+        context['tickets_booked'] = booking.objects.filter(user=u)
         if u.username == username :
             context['test'] = username
             return context
@@ -98,7 +145,16 @@ def search(request) :
 
     return render(request,'main/search.html')
 
+class booked(LoginRequiredMixin,DetailView) :
+    context_object_name = 'show'
+    model = models.show
+    template_name = 'main/confirm_movie.html'
 
+
+def cancel_ticket(request,pk=None) :
+    Ticket = booking.objects.get(pk=pk)
+    Ticket.delete()
+    return redirect('main:index')
    
 
 

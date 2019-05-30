@@ -12,5 +12,9 @@ urlpatterns = [
     re_path(r'^accounts-delete/(?P<pk>\d+)/',views.account_delete.as_view(),name="accounts-delete"),
     re_path(r'^movie-detail/(?P<pk>\d+)/',views.movie_detail_view.as_view(),name="movie-detail-view"),
     re_path(r'^theatre-list/(?P<pk>\d+)/',views.movie_booking_theatre.as_view(),name="movie-booking-theatre"),
-    re_path(r'^booking/(?P<pk>\d+)/',views.booking.as_view(),name="booking"),
+    re_path(r'^booking/(?P<pk>\d+)/',views.show_details.as_view(),name="movie-booking"),
+    # re_path(r'^booking/(?P<pk>\d+)/',views.booking,name="booking"),
+    re_path(r'^book-ticket/(?P<pk>\d+)/(?P<id>\d+)',views.book_ticket,name="book-ticket"),
+    re_path(r'^booked/(?P<pk>\d+)/',views.booked.as_view(),name="booked"),
+    re_path(r'^cancel/(?P<pk>\d+)/',views.cancel_ticket,name="cancel_ticket"),
 ]

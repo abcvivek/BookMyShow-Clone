@@ -26,7 +26,7 @@
     <h4 style="margin-top : 20px;margin-bottom: 20px;"><strong>{{ current.theatre.name }} {{ current.date }}</strong>
     </h4>
     {% endifchanged %}
-    <a href="{% url 'main:booking' pk=current.screen.id %}"><button class="btn btn-default" style="display: inline-block;margin-left : 15px;">{{ current.time }}</button></a>
+    <a href="{% url 'main:movie-booking' pk=current.id %}"><button class="btn btn-default" style="display: inline-block;margin-left : 15px;">{{ current.time }}</button></a>
     {% endfor %}
 </div>
 {% endblock %}

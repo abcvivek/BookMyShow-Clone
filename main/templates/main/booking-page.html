@@ -1,13 +1,119 @@
 {% extends 'main/layout.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
+<style>
+    label {
+        color: rgb(0, 0, 0);
+        letter-spacing: 2px;
+    }
+
+    .form-control {
+        width: 90%;
+    }
+
+    .btn-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(7, 7, 218);
+        border-radius: 2rem;
+        width: 150px;
+        font-weight: 700;
+    }
+
+    .btn-primary:hover {
+        color: rgb(0, 0, 0);
+        background-color: rgb(7, 7, 218);
+    }
+
+    .help-block {
+        font-size: 16px !important;
+    }
+
+    .btn-danger {
+        float: left;
+        margin-left: -18px;
+        margin-top: -10px;
+        height: 20px;
+        background-color: rgb(7, 7, 218);
+        border: none;
+    }
+
+    .btn-danger:hover {
+        background-color: rgb(122, 122, 241);
+    }
+
+    .payment {
+        font-weight: 400;
+        line-height: 27px;
+        letter-spacing: 3px;
+        text-align: center;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="container">
+                    <label class="btn btn-danger"><input type="checkbox" class="seats" value="1" disabled style="width:0px;"></label>
+                <h3 style="position: absolute;margin-top : -10px;margin-left: 30px;"><strong>Booked Seats</strong></h3>
+            </div></br></br>
+
+            <div class="seatStructure txt-center" style="overflow-x:auto;">
+                <table id="seatsBlock">
+                    <tr>
+                        {% with range=show.screen.no_of_rows %}
+                        {% for i in i|rjust:range %}
+                        <td style="padding-left : 25px;">{{ forloop.counter }}</td>
+                        {% endfor %}
+                        {% endwith %}
+                    </tr>
+                    {% with range=show.screen.no_of_columns  %}
+                    {% for j in j|rjust:range %}
+                    <tr>
+                        <td style="padding-bottom : 25px;">{{ forloop.counter }}</td>
+                        {% with range=show.screen.no_of_rows %}
+                        {% for k in k|rjust:range %}
+                        <td>{% for t in tickets_booked %}
+                            {% if forloop.parentloop.counter == t.row_num and  forloop.parentloop.parentloop.counter == t.col_num %}
+                            <label class="btn btn-danger">
+                                <input type="checkbox" class="seats" value="{{ forloop.parentloop.counter }}" disabled
+                                    style="width:0px;"></label>
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                        {% endwith %}
+                    </tr>
+                    {% endfor %}
+                    {% endwith %}
+                </table></br>
+                <div class="jumbotron" style="width:90%;padding : 6px;">
+                    <h3 style="margin-left : 40%;color:rgb(7, 7, 218);"><strong>SCREEN</strong></h3>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="jumbotron" style="width:90%;">
+                <form action="{% url 'main:book-ticket' pk=show.id id=user.id %}" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy}}
+                    </br><input type="submit" class="btn btn-primary" value="Submit" />
+                    </br></br>
+                    <h5 class="payment"><strong>NOTE* :</strong> Rs {{ show.price }} will be deducted from your linked
+                        wallet</h5>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
 
 
 
-
-    {% endblock %}
-
-
-    
-    
+{% endblock %}

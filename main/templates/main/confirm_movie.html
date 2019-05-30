@@ -1,0 +1,40 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+
+.container {
+position: relative;
+  text-align: center
+}
+
+.top-left {
+position: absolute;
+  top: 120px;
+  left: 460px;
+}
+
+h3,h4 {
+    letter-spacing: 4px;
+    line-height: 35px;
+}
+
+</style>
+
+<div class="container" style="margin-top : 30px;margin-bottom:60px;">
+    <h3><strong>Your Ticket has been Booked</strong></h3></br>
+    <img src="{% static 'image/ticket.png' %}" alt="Ticket" class="img img-responsive center-block"/>
+    <div class="top-left">
+        <h3><strong>{{ show.movie.name }}</strong></h3>
+        <h3>{{show.theatre.name }} Theatre</h3>
+        <h3>{{show.screen.name }}</h3>
+        <h4>{{show.date }}</h4>
+        <h4>{{show.time }}</h4>
+    </div>
+</div>
+    
+
+{% endblock %}
